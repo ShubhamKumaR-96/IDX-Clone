@@ -1,12 +1,16 @@
-
-import React from 'react'
+import { useState } from "react";
+import "./App.css";
+import TestPingComponent from "./components/atoms/TestPing.jsX";
 
 const App = () => {
-  return (
-    <div>
-      Hello
-    </div>
-  )
-}
+  const [isVisible, setIsVisible] = useState(false);
 
-export default App
+  return (
+    <>
+      <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>
+      {isVisible && <TestPingComponent />}
+    </>
+  );
+};
+
+export default App;
