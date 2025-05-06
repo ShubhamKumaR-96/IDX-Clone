@@ -1,19 +1,23 @@
-import express from "express"
-import { PORT } from "./config/serverConfig.js"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
 
-const app=express()
+import { PORT } from "./config/serverConfig.js";
+import apiRouter from "./routes/index.js";
 
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(cors())
+const app = express();
 
-app.get('/test',(req,res)=>{
-    return res.json({
-        msg:"Testing "
-    })
-})
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(cors());
 
-app.listen(PORT,()=>{
-    console.log(`Server running at http://localhost:${PORT}`)
-})
+app.use("/api", apiRouter);
+
+app.get("/test", (req, res) => {
+  return res.json({
+    msg: "Testing ",
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
