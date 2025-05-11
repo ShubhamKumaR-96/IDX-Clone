@@ -13,7 +13,7 @@ export const useCreateProject = () => {
   });
 
   return {
-    createProjectMuation: mutateAsync,
+    createProjectMutation: mutateAsync,
     isPending,
     isSuccess,
     error,

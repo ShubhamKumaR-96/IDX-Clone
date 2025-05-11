@@ -2,6 +2,7 @@ import util from "util";
 import child_process from "child_process";
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
+import { REACT_PROJECT_CMD } from "../config/serverConfig.js";
 
 // Convert child_process.exec into a Promise-based function
 const execPromisified = util.promisify(child_process.exec);
@@ -19,11 +20,12 @@ export const createProjectController = async (req, res) => {
   // const { stdout, stderr } = await execPromisified('dir');
   // console.log("stdout", stdout);
 
-  const response=await execPromisified('npm create vite@latest playground -- --template react',{
+  const response=await execPromisified(REACT_PROJECT_CMD,{
     cwd:`./projects/${projectId}`
   })
 
   return res.json({
     msg: "Project Created",
+    projectId:projectId
   });
 };

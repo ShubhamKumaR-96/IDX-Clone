@@ -1,17 +1,20 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useCreateProject } from "../hooks/apis/mutations/useCreateProject";
 import { Typography, Button, Spin, Space, message } from "antd";
 
 const { Title } = Typography;
 
 const CreateProject = () => {
-  const { createProjectMuation, isPending } = useCreateProject();
+  const { createProjectMutation, isPending } = useCreateProject();
+  const navigate=useNavigate()
 
   async function handleCreateProject() {
     console.log("Going to trigger the projects");
     try {
-      await createProjectMuation();
+     const res= await createProjectMutation();
       message.success("Project created successfully!");
+      navigate(`/project/${res.projectId}`)
+      console.log(res)
     } catch (error) {
       console.log("Error creating Projects", error);
       message.error("Failed to create project");
