@@ -1,31 +1,24 @@
-import util from "util";
-import child_process from "child_process";
-import fs from "fs/promises";
-import { v4 as uuidv4 } from "uuid";
-import { REACT_PROJECT_CMD } from "../config/serverConfig.js";
+import { createProjectServcvice, getProjectTreeService } from "../services/ProjectService.js";
 
-// Convert child_process.exec into a Promise-based function
-const execPromisified = util.promisify(child_process.exec);
+
 
 export const createProjectController = async (req, res) => {
-  // 🔹 Generate a unique project ID using UUID v4
-  const projectId = uuidv4();
-  console.log("New project id :", projectId);
+  
+     const projectId=await createProjectServcvice()
 
-  // 🔹 Create a new directory for the project using the unique ID
-  // This will store user projects inside the "projects" folder
-  await fs.mkdir(`./projects/${projectId}`);
-
-  // ✅ If you ever want to execute shell commands:
-  // const { stdout, stderr } = await execPromisified('dir');
-  // console.log("stdout", stdout);
-
-  const response=await execPromisified(REACT_PROJECT_CMD,{
-    cwd:`./projects/${projectId}`
-  })
-
-  return res.json({
-    msg: "Project Created",
-    projectId:projectId
-  });
+     return res.json({
+      messgae:"Project Created successfully",
+      projectId:projectId
+     })
+  
 };
+
+export const getProjectTree=async(req,res)=>{
+  const tree=await getProjectTreeService(req.params.projectId)
+   return res.status(200).json({
+    projectId:tree,
+    success:true,
+    message:"Successfully fetched the tree"
+   })
+
+}
