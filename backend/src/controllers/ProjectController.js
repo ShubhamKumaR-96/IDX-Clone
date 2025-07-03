@@ -1,10 +1,9 @@
-import { createProjectServcvice, getProjectTreeService } from "../services/ProjectService.js";
+import { createProjectService, getProjectTreeService } from "../services/ProjectService.js";
 
-
-
+ 
 export const createProjectController = async (req, res) => {
   
-     const projectId=await createProjectServcvice()
+     const projectId=await createProjectService()
 
      return res.json({
       messgae:"Project Created successfully",

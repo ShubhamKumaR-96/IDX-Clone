@@ -5,8 +5,9 @@ import { REACT_PROJECT_CMD } from "../config/serverConfig.js";
 import path from "path";
 import directoryTree from "directory-tree";
 
-export const createProjectServcvice=async()=>{
-const projectId = uuidv4();
+export const createProjectService=async()=>{
+
+  const projectId = uuidv4();
   console.log("New project id :", projectId);
 
   // 🔹 Create a new directory for the project using the unique ID

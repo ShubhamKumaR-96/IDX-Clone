@@ -1,4 +1,3 @@
-import React from "react";
 import { useTestPing } from "../../hooks/apis/queries/useTestPing";
 
 const TestPingComponent = () => {
