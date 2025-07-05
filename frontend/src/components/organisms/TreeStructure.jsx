@@ -1,25 +1,24 @@
 import { useEffect } from "react"
 import { useTreeStructureStore } from "../../store/treeStructureStore"
-import { useParams } from "react-router-dom"
+import { Tree } from "../molecules/TreeNode/Tree"
 
 
 const TreeStructure = () => {
     const {treeStructure,setTreeStructure}=useTreeStructureStore()
 
-    const {projectId}=useParams()
 
     useEffect(()=>{
         if(treeStructure){
-            console.log("Tree structure:",treeStructure)
+            console.log("Tree structure:", treeStructure)
         }else{
-            setTreeStructure(projectId)
+            setTreeStructure()
         }
     
-    },[treeStructure,setTreeStructure,projectId])
+    },[treeStructure,setTreeStructure])
 
   return (
     <div>
-     <h1> Tree Structure</h1>
+     <Tree FileFolderData={treeStructure} />
     </div>
   )
 }
